@@ -8,3 +8,6 @@ data/raw/*
 !data/raw/.gitkeep
 data/generated/*
 *.pyc
+.env.airflow
+logs/
+.streamlit/secrets.toml

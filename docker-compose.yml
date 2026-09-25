@@ -18,18 +18,22 @@ services:
   nl2sql-api:
     build: .
     environment:
-      POSTGRES_HOST: postgres
+      POSTGRES_HOST: host.docker.internal
       POSTGRES_PORT: 5432
       POSTGRES_DB: retail_analytics
-      POSTGRES_USER: retail
-      POSTGRES_PASSWORD: retail
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
       ANALYTICS_DB_TARGET: local
-      LOCAL_POSTGRES_HOST: postgres
+      LOCAL_DATABASE_URL: postgresql://postgres:postgres@host.docker.internal:5432/retail_analytics
+      LOCAL_POSTGRES_HOST: host.docker.internal
       LOCAL_POSTGRES_PORT: 5432
       LOCAL_POSTGRES_DB: retail_analytics
-      LOCAL_POSTGRES_USER: retail
-      LOCAL_POSTGRES_PASSWORD: retail
-      NL2SQL_PROVIDER: mock
+      LOCAL_POSTGRES_USER: postgres
+      LOCAL_POSTGRES_PASSWORD: postgres
+      NL2SQL_PROVIDER: openai
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      OPENAI_BASE_URL: ${OPENAI_BASE_URL}
+      OPENAI_MODEL: ${OPENAI_MODEL}
     ports:
       - "8000:8000"
     depends_on:

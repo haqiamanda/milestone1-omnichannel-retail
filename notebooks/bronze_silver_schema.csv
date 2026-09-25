@@ -1,0 +1,178 @@
+table_schema,table_name,ordinal_position,column_name,data_type,is_nullable
+bronze,campaign_spend,1,spend_date,text,YES
+bronze,campaign_spend,2,campaign_id,text,YES
+bronze,campaign_spend,3,channel,text,YES
+bronze,campaign_spend,4,spend_amount,double precision,YES
+bronze,campaign_spend,5,timestamp,timestamp with time zone,YES
+bronze,city_reference,1,raw,jsonb,YES
+bronze,city_reference,2,timestamp,timestamp with time zone,YES
+bronze,customer_addresses,1,raw,jsonb,YES
+bronze,customer_addresses,2,timestamp,timestamp with time zone,YES
+bronze,customer_profiles,1,raw,jsonb,YES
+bronze,customer_profiles,2,timestamp,timestamp with time zone,YES
+bronze,customers,1,raw,jsonb,YES
+bronze,customers,2,timestamp,timestamp with time zone,YES
+bronze,inventory_snapshots,1,product_id,text,YES
+bronze,inventory_snapshots,2,location_id,text,YES
+bronze,inventory_snapshots,3,snapshot_date,text,YES
+bronze,inventory_snapshots,4,available_quantity,bigint,YES
+bronze,inventory_snapshots,5,reserved_quantity,bigint,YES
+bronze,inventory_snapshots,6,unit_cost,double precision,YES
+bronze,inventory_snapshots,7,timestamp,timestamp with time zone,YES
+bronze,order_items,1,raw,jsonb,YES
+bronze,order_items,2,timestamp,timestamp with time zone,YES
+bronze,order_promotions,1,raw,jsonb,YES
+bronze,order_promotions,2,timestamp,timestamp with time zone,YES
+bronze,orders,1,raw,jsonb,YES
+bronze,orders,2,timestamp,timestamp with time zone,YES
+bronze,payment_events,1,raw,jsonb,YES
+bronze,payment_events,2,timestamp,timestamp with time zone,YES
+bronze,product_categories,1,raw,jsonb,YES
+bronze,product_categories,2,timestamp,timestamp with time zone,YES
+bronze,products,1,raw,jsonb,YES
+bronze,products,2,timestamp,timestamp with time zone,YES
+bronze,promotions,1,raw,jsonb,YES
+bronze,promotions,2,timestamp,timestamp with time zone,YES
+bronze,refund_events,1,raw,jsonb,YES
+bronze,refund_events,2,timestamp,timestamp with time zone,YES
+bronze,return_events,1,raw,jsonb,YES
+bronze,return_events,2,timestamp,timestamp with time zone,YES
+bronze,sales_channels,1,raw,jsonb,YES
+bronze,sales_channels,2,timestamp,timestamp with time zone,YES
+bronze,stores,1,raw,jsonb,YES
+bronze,stores,2,timestamp,timestamp with time zone,YES
+bronze,support_events,1,raw,jsonb,YES
+bronze,support_events,2,timestamp,timestamp with time zone,YES
+bronze,web_events,1,raw,jsonb,YES
+bronze,web_events,2,timestamp,timestamp with time zone,YES
+silver,campaign_spend,1,spend_date,text,YES
+silver,campaign_spend,2,campaign_id,text,YES
+silver,campaign_spend,3,channel,text,YES
+silver,campaign_spend,4,spend_amount,double precision,YES
+silver,campaign_spend,5,timestamp,timestamp with time zone,YES
+silver,cities,1,city_id,text,NO
+silver,cities,2,city_name,text,YES
+silver,cities,3,country,text,YES
+silver,cities,4,loaded_at_utc,timestamp with time zone,YES
+silver,city_reference,1,city_id,text,YES
+silver,city_reference,2,country,text,YES
+silver,city_reference,3,city_name,text,YES
+silver,city_reference,4,ingested_at_utc,timestamp with time zone,YES
+silver,customer_addresses,1,city_id,text,YES
+silver,customer_addresses,2,address_id,text,YES
+silver,customer_addresses,3,customer_id,text,YES
+silver,customer_addresses,4,valid_to_utc,text,YES
+silver,customer_addresses,5,source_row_id,text,YES
+silver,customer_addresses,6,valid_from_utc,text,YES
+silver,customer_addresses,7,ingested_at_utc,timestamp with time zone,YES
+silver,customer_profiles,1,city_id,text,YES
+silver,customer_profiles,2,customer_id,text,YES
+silver,customer_profiles,3,valid_to_utc,text,YES
+silver,customer_profiles,4,source_row_id,text,YES
+silver,customer_profiles,5,valid_from_utc,text,YES
+silver,customer_profiles,6,customer_segment,text,YES
+silver,customer_profiles,7,ingested_at_utc,timestamp with time zone,YES
+silver,customers,1,city_id,text,YES
+silver,customers,2,customer_id,text,YES
+silver,customers,3,source_row_id,text,YES
+silver,customers,4,created_at_utc,text,YES
+silver,customers,5,customer_segment,text,YES
+silver,customers,6,ingested_at_utc,timestamp with time zone,YES
+silver,inventory_snapshots,1,product_id,text,YES
+silver,inventory_snapshots,2,location_id,text,YES
+silver,inventory_snapshots,3,snapshot_date,text,YES
+silver,inventory_snapshots,4,available_quantity,bigint,YES
+silver,inventory_snapshots,5,reserved_quantity,bigint,YES
+silver,inventory_snapshots,6,unit_cost,double precision,YES
+silver,inventory_snapshots,7,timestamp,timestamp with time zone,YES
+silver,order_items,1,order_id,text,YES
+silver,order_items,2,quantity,bigint,YES
+silver,order_items,3,product_id,text,YES
+silver,order_items,4,unit_price,double precision,YES
+silver,order_items,5,order_item_id,text,YES
+silver,order_items,6,source_row_id,text,YES
+silver,order_items,7,item_discount_amount,double precision,YES
+silver,order_items,8,ingested_at_utc,timestamp with time zone,YES
+silver,order_promotions,1,order_id,text,YES
+silver,order_promotions,2,promotion_id,text,YES
+silver,order_promotions,3,source_row_id,text,YES
+silver,order_promotions,4,discount_amount,bigint,YES
+silver,order_promotions,5,ingested_at_utc,timestamp with time zone,YES
+silver,orders,1,status,text,YES
+silver,orders,2,order_id,text,YES
+silver,orders,3,store_id,text,YES
+silver,orders,4,customer_id,text,YES
+silver,orders,5,sales_channel,text,YES
+silver,orders,6,source_row_id,text,YES
+silver,orders,7,ordered_at_utc,text,YES
+silver,orders,8,updated_at_utc,text,YES
+silver,orders,9,shipping_revenue,double precision,YES
+silver,orders,10,ingested_at_utc,timestamp with time zone,YES
+silver,payment_events,1,event_id,text,YES
+silver,payment_events,2,event_type,text,YES
+silver,payment_events,3,ingested_at_utc,timestamp with time zone,YES
+silver,payment_events,4,occurred_at_utc,text,YES
+silver,payment_events,5,payload.amount,double precision,YES
+silver,payment_events,6,payload.order_id,text,YES
+silver,payment_events,7,payload.payment_id,text,YES
+silver,product_categories,1,product_id,text,YES
+silver,product_categories,2,category_id,text,YES
+silver,product_categories,3,valid_to_utc,text,YES
+silver,product_categories,4,category_name,text,YES
+silver,product_categories,5,source_row_id,text,YES
+silver,product_categories,6,valid_from_utc,text,YES
+silver,product_categories,7,ingested_at_utc,timestamp with time zone,YES
+silver,products,1,sku,text,YES
+silver,products,2,product_id,text,YES
+silver,products,3,unit_price,double precision,YES
+silver,products,4,product_name,text,YES
+silver,products,5,source_row_id,text,YES
+silver,products,6,ingested_at_utc,timestamp with time zone,YES
+silver,promotions,1,end_date,text,YES
+silver,promotions,2,start_date,text,YES
+silver,promotions,3,promotion_id,text,YES
+silver,promotions,4,discount_rate,double precision,YES
+silver,promotions,5,source_row_id,text,YES
+silver,promotions,6,promotion_code,text,YES
+silver,promotions,7,promotion_type,text,YES
+silver,promotions,8,ingested_at_utc,timestamp with time zone,YES
+silver,refund_events,1,event_id,text,YES
+silver,refund_events,2,event_type,text,YES
+silver,refund_events,3,ingested_at_utc,timestamp with time zone,YES
+silver,refund_events,4,occurred_at_utc,text,YES
+silver,refund_events,5,payload.amount,double precision,YES
+silver,refund_events,6,payload.order_id,text,YES
+silver,refund_events,7,payload.refund_id,text,YES
+silver,return_events,1,event_id,text,YES
+silver,return_events,2,event_type,text,YES
+silver,return_events,3,ingested_at_utc,timestamp with time zone,YES
+silver,return_events,4,occurred_at_utc,text,YES
+silver,return_events,5,payload.order_id,text,YES
+silver,return_events,6,payload.return_id,text,YES
+silver,sales_channels,1,channel_id,text,YES
+silver,sales_channels,2,channel_name,text,YES
+silver,sales_channels,3,source_row_id,text,YES
+silver,sales_channels,4,ingested_at_utc,timestamp with time zone,YES
+silver,stores,1,city_id,text,YES
+silver,stores,2,store_id,text,YES
+silver,stores,3,store_name,text,YES
+silver,stores,4,location_type,text,YES
+silver,stores,5,source_row_id,text,YES
+silver,stores,6,ingested_at_utc,timestamp with time zone,YES
+silver,support_events,1,event_id,text,YES
+silver,support_events,2,event_type,text,YES
+silver,support_events,3,ingested_at_utc,timestamp with time zone,YES
+silver,support_events,4,occurred_at_utc,text,YES
+silver,support_events,5,payload.reason,text,YES
+silver,support_events,6,payload.order_id,text,YES
+silver,support_events,7,payload.ticket_id,text,YES
+silver,support_events,8,payload.customer_id,text,YES
+silver,web_events,1,event_id,text,YES
+silver,web_events,2,event_type,text,YES
+silver,web_events,3,ingested_at_utc,timestamp with time zone,YES
+silver,web_events,4,occurred_at_utc,text,YES
+silver,web_events,5,payload.channel,text,YES
+silver,web_events,6,payload.order_id,text,YES
+silver,web_events,7,payload.session_id,text,YES
+silver,web_events,8,payload.campaign_id,text,YES
+silver,web_events,9,payload.customer_id,text,YES

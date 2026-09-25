@@ -1,0 +1,68 @@
+name: omnichannel_airflow
+x-airflow-common: &airflow-common
+  build:
+    context: .
+    dockerfile: Dockerfile.airflow
+  user: "50000:0"
+  working_dir: /opt/airflow
+  env_file:
+    - .env.airflow
+  volumes:
+    - ./dags:/opt/airflow/dags
+    - ./pipeline:/opt/airflow/pipeline
+    - ./database:/opt/airflow/database
+    - ./data:/opt/airflow/data
+    - ./logs:/opt/airflow/logs
+
+x-airflow-depends-on: &airflow-depends-on
+  depends_on:
+    airflow-postgres:
+      condition: service_healthy
+    airflow-init:
+      condition: service_completed_successfully
+
+services:
+  airflow-postgres:
+    image: postgres:13
+    container_name: omnichannel-airflow-postgres
+    ports:
+      - "5434:5432"
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "airflow"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  airflow-init:
+    <<: *airflow-common
+    container_name: omnichannel-airflow-init
+    entrypoint: /bin/bash
+    command:
+      - -c
+      - |
+        mkdir -p /opt/airflow/logs /opt/airflow/plugins
+        chown -R "50000:0" /opt/airflow/logs /opt/airflow/plugins
+        exec /entrypoint airflow db init
+
+  airflow-scheduler:
+    <<: [*airflow-common, *airflow-depends-on]
+    container_name: omnichannel-airflow-scheduler
+    command: scheduler
+    restart: on-failure
+
+  airflow-webserver:
+    <<: [*airflow-common, *airflow-depends-on]
+    container_name: omnichannel-airflow-webserver
+    command: webserver
+    restart: always
+    ports:
+      - "8085:8080"
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 30s
+      retries: 5
